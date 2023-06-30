@@ -4,7 +4,9 @@
 <div class="row">
   <div class="col">
 
-    <form autocomplete="off">
+    <form [formGroup]="myForm"
+          (ngSubmit)="onSave()"
+          autocomplete="off">
 
       <!-- Campo de producto -->
       <div class="mb-3 row">
@@ -12,6 +14,7 @@
         <div class="col-sm-9">
 
           <input type="text"
+                 formControlName="name"
                  class="form-control"
                  placeholder="Nombre del producto">
 
@@ -27,6 +30,7 @@
         <label class="col-sm-3 col-form-label">Precio</label>
         <div class="col-sm-9">
           <input type="number"
+                 formControlName="price"
                  class="form-control"
                  placeholder="Precio del producto">
           <span class="form-text text-danger">
@@ -40,6 +44,7 @@
         <label class="col-sm-3 col-form-label">Existencias</label>
         <div class="col-sm-9">
           <input type="number"
+                 formControlName="inStorage"
                  class="form-control"
                  placeholder="Existencias del producto">
 
@@ -60,13 +65,10 @@
       </div>
 
 
-
     </form>
 
   </div>
 </div>
-
-
 
 
 <div class="row">
