@@ -21,6 +21,30 @@ export class DynamicPageComponent {
   constructor(private fb: FormBuilder) {
   }
 
+  isValidField = (field: string): boolean => this.myForm.controls[field].invalid && this.myForm.touched;
+
+  isValidFieldInArray = (formArray: FormArray, index: number) =>
+    formArray.controls[index].invalid && formArray.controls[index].touched;
+
+  getFieldError = (field: string): string | null => {
+    if (!this.myForm.controls[field] && !this.myForm.controls[field].errors) return null;
+
+    const errors = this.myForm.controls[field].errors!;
+
+    for (const key of Object.keys(errors)) {
+      console.log(key);
+      switch (key) {
+        case 'required':
+          return 'Este campo es requerido';
+
+        case 'minlength':
+          return `Mínimo ${errors[key].requiredLength} caracteres`;
+      }
+    }
+
+    return null;
+  }
+
   onSubmit = (): void => {
     if (this.myForm.invalid) {
       this.myForm.markAllAsTouched();
